@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} Predict {% endblock %}
+{% block content %}
+
+
+<style>
+    body{
+        background-color: wheat;
+    }
+    .formpage{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+        width: 100%;
+      
+    }
+</style>
+
+<h1 style="text-align: center;">Parkinsons FoG Predictor</h1>
+<div class="formpage">
+{% if form %}
+<form method="POST" enctype="multipart/form-data">
+  Choose a Model:  {{form.mlmodel}} <br>
+  No of data display: {{form.total_data}}
+
+    {{ form.hidden_tag() }}
+    <p>
+       
+        {{ form.file }}
+    </p>
+    <input class="btn btn-primary" type="submit" value="Upload">
+</form>
+{% endif %}
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %} Predict {% endblock %}
+{% block content %}
+
+
+<style>
+    body{
+        background-color: wheat;
+        text-decoration: none;
+        list-style: none;
+    }
+    .formpage{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+        width: 100%;
+      
+    }
+</style>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Performance Metrics</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+     
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <img src="{{ url_for('static', filename='confusion_matrix.png') }}" height="100%" width="100%" alt="Accelerometer Plot">
+            <h1>Accuracy Score:{{accuracy*100}}%</h1>
+            <h1>Classification Report</h1>
+            <pre>
+              {{ report | safe }}
+          </pre>
+          </div>
+
+
+      </div>
+  </div>
+</div>
+
+<h1 style="text-align: center;">Results using Model {{selected_model}}</h1>
+
+<h1><a  data-toggle="modal" data-target="#myModal"   href="https://www.facebook.com" class="btn btn-info">SHOW METRICS</a ></h1>
+
+
+
+      
+
+
+
+
+
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Time</th>
+        <th scope="col">AccV</th>
+        <th scope="col">AccMl</th>
+        <th scope="col">AccAP</th>
+        <th scope="col">Visit_x</th>
+        <th scope="col">Age</th>
+        <th scope="col">Sex</th>
+        <th scope="col">Years_Since_Dx</th>
+        <th scope="col">UPDRSII_ON</th>
+        <th scope="col">UPDRSII_OFF</th>
+        <th scope="col">NFOGQ</th>
+        <th scope="col">Medication</th>
+        <th scope="col">Init</th>
+        <th scope="col">Completion</th>
+        <th scope="col">Kinetic</th>
+        <th scope="col">Predicted</th>
+        <th scope="col">Actual</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for i in input_data  %}
+      <tr>
+        <td>{{loop.index-1}}</td>
+        <td>{{i.time  }}</td>
+        <td>{{i.accv }}</td>
+        <td>{{i.accml }}</td>
+        <td>{{i.accap }}</td>
+        <td>{{i.visit_x }} </td>
+        <td>{{i.age }} </td>
+        <td>{{i.sex }}</td> 
+        <td>{{i.years_since_dx }} </td>
+        <td>{{i.updrsiii_on }}</td>
+        <td>{{i.updrsiii_off }}</td>
+        <td>{{i.nfogq }} </td>
+        <td>{{i.medication }}</td>
+        <td>{{i.init }}</td>
+        <td>{{i.completion }}</td>
+        <td>{{i.kinetic  }}</td>
+        <td>{{ prediction[loop.index-1] }}</td>
+        
+        <td>{{truth[loop.index-1]}}</td>
+        </tr>
+
+      {% endfor %}
+
+
+    
+    </tbody>
+  </table>
+
+
+{% endblock %}

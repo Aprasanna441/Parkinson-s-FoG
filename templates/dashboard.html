@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="card" style="width: 18rem;">
+      
+        <div class="card-body">
+          <h5 class="card-title">{{current_user.email}}</h5>
+          <p class="card-text"></p>
+          <h1>Add New Data to Database</h1>
+          <form method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <input type="number"  name="{{ form.user_id.name }}" hidden="true" value={{current_user.id}} required>
+            <label for="csv_file">Select CSV File:</label>
+            {{ form.csv_file }}
+            <button type="submit">Upload</button>
+        </form>
+        </div>
+      </div>
+      </div>
+{% endblock %}

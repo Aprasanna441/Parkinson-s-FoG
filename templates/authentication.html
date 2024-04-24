@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</head>
+<style>.container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.hidden {
+    display: none;
+}</style>
+<body style="background-color: antiquewhite;">
+    <h1 style="text-align: center;">Parkinsons Freezing of Gait Prediction System</h1>
+
+   
+    <div class="container">
+       
+        
+        <button id="toggleBtn">Signup
+            <div class="form-check form-switch">
+            <input class="form-check-input" style="transform: rotate(90deg);" type="checkbox" id="flexSwitchCheckChecked" checked>
+     
+          </div>Login</button>
+        
+          <h5 style="color:red"> {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} text-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}</h5>
+            
+       
+        <div id="formContainer">
+            <form method="POST" id="form1" action="/account/login" >
+                <h1>Login</h1>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required><br><br>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                
+                <input type="submit" class="btn btn-info" value="Login">
+
+            </form>
+            <form method="POST" id="form2" class="hidden" action="/account/signup" >
+                <h1>Signup</h1>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required><br><br>
+
+
+
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                
+                <label for="passwordconfirm">Password Confirm:</label>
+                <input type="password" id="passwordconfirm" name="password_confirm" required><br><br>
+                
+                <input class="btn btn-info" type="submit" value="Signup">
+                
+            </form>
+            <a href="#">Forget Password?Reset Here</a>
+        </div>
+    </div>
+</body>
+<script>
+    const toggleBtn = document.getElementById("toggleBtn");
+const form1 = document.getElementById("form1");
+const form2 = document.getElementById("form2");
+    toggleBtn.addEventListener("click", function() {
+    form1.classList.toggle("hidden");
+    form2.classList.toggle("hidden");
+   
+});
+</script>
+</html>
